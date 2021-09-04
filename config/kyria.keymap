@@ -1,3 +1,4 @@
+
 /*
  * Copyright (c) 2020 The ZMK Contributors
  *
@@ -7,24 +8,109 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 
+#define LAYER_DEFAULT 0
+#define LAYER_DIGITS 1
+#define LAYER_MOUSE 2
+#define LAYER_SYMBOLS 3
+#define LAYER_FN 4
+#define LAYER_MOD_RIGHT 5
+#define LAYER_MOD_LEFT 6
+
 / {
+  	behaviors {
+      hm: homerow_mods {
+        compatible = "zmk,behavior-hold-tap";
+        label = "HOMEROW_MODS";
+        #binding-cells = <2>;
+        tapping-term-ms = <150>;
+        quick_tap_ms = <0>;
+        flavor = "tap-preferred";
+        bindings = <&kp>, <&kp>;
+      };
+
+      hp: hold_preffered_keys {
+        compatible = "zmk,behavior-hold-tap";
+        label = "HOLD_PREFERRED";
+        #binding-cells = <2>;
+        tapping-term-ms = <150>;
+        quick_tap_ms = <0>;
+        flavor = "tap-preferred";
+        bindings = <&kp>, <&kp>;
+      };
+    };
+
 	keymap {
 		compatible = "zmk,keymap";
 
-		default_layer {
-// ---------------------------------------------------------------------------------------------------------------------------------
-// |  ESC  |  Q  |  W  |  E   |  R   |  T   |                                          |  Y   |  U    |  I    |  O   |   P   |   \  |
-// |  TAB  |  A  |  S  |  D   |  F   |  G   |                                          |  H   |  J    |  K    |  L   |   ;   |   '  |
-// | SHIFT |  Z  |  X  |  C   |  V   |  B   | L SHIFT | L SHIFT |  | L SHIFT | L SHIFT |  N   |  M    |  ,    |  .   |   /   | CTRL |
-//                     | GUI  | DEL  | RET  |  SPACE  |   ESC   |  |   RET   |  SPACE  | TAB  | BSPC  | R-ALT |
-			bindings = <
-	&kp ESC   &kp Q &kp W &kp E &kp R &kp T                                                &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSLH
-	&kp TAB   &kp A &kp S &kp D &kp F &kp G                                                &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
-	&kp LSHFT &kp Z &kp X &kp C &kp V &kp B &kp LSHFT &kp LSHFT        &kp LSHFT &kp LSHFT &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &kp RCTRL
-	                 &kp LGUI &kp DEL &kp RET &kp SPACE &kp ESC        &kp RET  &kp SPACE  &kp TAB &kp BSPC &kp RALT
-			>;
 
-			sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
-		};
-	};
+      layer_default {
+
+        bindings = <
+	&kp TAB	&kp Q	&kp W	&kp E	&kp R	&kp T	&kp Y	&kp U	&kp I	&kp O	&kp P	&kp GRAVE	&kp EQUAL	
+  &hm LCTRL A	&hm LALT S &hm LGUI D &hm LEFT_SHIFT F
+  &kp G	 &kp H	
+  &hm LEFT_SHIFT J &hm LGUI K	&hm LALT L	&hm LCTRL SEMICOLON	
+  &kp SQT	&kp BACKSLASH	&kp Z	&kp X	&kp C	&kp V	&kp B	&mo LAYER_FN	&kp ESC	&none	&none	&kp N	&kp M	&kp COMMA	&kp DOT	&kp SLASH	&kp MINUS	&kp CAPSLOCK	&none	&none	&mo LAYER_DIGITS	&mo LAYER_MOUSE	
+  &hp LEFT_SHIFT ENTER	&kp SPACE	&kp BACKSPACE	&kp TAB	&kp BACKSPACE	
+
+        >;
+        sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+      };
+    
+      layer_digits {
+
+        bindings = <
+	&kp CARET	&kp LESS_THAN	&kp GREATER_THAN	&kp LEFT_BRACE	&kp RIGHT_BRACE	&kp EXCLAMATION	&kp KP_PLUS	&kp KP_MINUS	&kp KP_MULTIPLY	&kp KP_DIVIDE	&kp PERCENT	&kp KP_DOT	&none	&kp LEFT_BRACKET	&kp RIGHT_BRACKET	&kp LPAR	&kp RPAR	&kp AMPERSAND	&kp KP_NUMBER_1	&kp KP_NUMBER_2	&kp KP_NUMBER_3	&kp KP_NUMBER_4	&kp KP_NUMBER_5	&kp BACKSLASH	&none	&none	&kp AT	&kp DOLLAR	&kp HASH	&kp PIPE	&none	&none	&none	&none	&kp KP_NUMBER_6	&kp KP_NUMBER_7	&kp KP_NUMBER_8	&kp KP_NUMBER_9	&kp KP_NUMBER_0	&kp KP_EQUAL	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	
+
+        >;
+        sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+      };
+    
+      layer_mouse {
+
+        bindings = <
+	&kp INSERT	&none	&kp K_SCROLL_DOWN	&kp K_SCROLL_UP	&none	&none	&none	&none	&none	&none	&kp SLCK	&kp PSCRN	&kp K_MENU	&kp LCTL	&kp LALT	&kp RGUI	&kp LSHIFT	&none	&kp LEFT	&kp DOWN	&kp UP	&kp RIGHT	&kp DEL	&kp PAUSE_BREAK	&kp CAPSLOCK	&none	&none	&kp PAGE_UP	&kp PAGE_DOWN	&none	&none	&none	&none	&none	&kp ENTER	&kp BACKSPACE	&kp TAB	&none	&kp HOME	&kp END	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	
+
+        >;
+        sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+      };
+    
+      layer_symbols {
+
+        bindings = <
+	&none	&none	&none	&none	&none	&none	&kp HASH	&kp UNDERSCORE	&kp AT	&kp CARET	&none	&kp PIPE	&none	&none	&none	&none	&none	&none	&kp EXCLAMATION	&kp AMPERSAND	&kp PIPE	&kp DOLLAR	&kp COLON	&kp DOUBLE_QUOTES	&none	&none	&none	&none	&none	&none	&none	&none	&none	&none	&none	&none	&kp LESS_THAN	&kp GREATER_THAN	&kp QUESTION	&none	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	
+
+        >;
+        sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+      };
+    
+      layer_fn {
+
+        bindings = <
+	&none	&none	&none	&none	&none	&none	&kp F11	&kp F12	&none	&none	&none	&none	&none	&kp LALT	&kp LCTL	&kp LSHIFT	&kp LGUI	&none	&kp F1	&kp F2	&kp F3	&kp F4	&kp F5	&none	&none	&none	&none	&none	&none	&none	&none	&none	&none	&none	&kp F6	&kp F7	&kp F8	&kp F9	&kp F10	&none	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	
+
+        >;
+        sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+      };
+    
+      layer_mod_right {
+
+        bindings = <
+	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&kp LSHIFT	&kp LGUI	&kp LALT	&kp LCTL	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	
+
+        >;
+        sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+      };
+    
+      layer_mod_left {
+
+        bindings = <
+	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&kp LCTL	&kp LALT	&kp LGUI	&kp LSHIFT	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	&trans	
+
+        >;
+        sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+      };
+    
+  };
 };
+  
