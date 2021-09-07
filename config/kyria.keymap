@@ -48,7 +48,7 @@
       layer_default {
 
         bindings = <
-	&kp ESC	&kp Q	&kp W	&kp E	&kp R	&kp T	&kp Y	&kp U	&kp I	&kp O	&kp P	&kp GRAVE	&kp EQUAL	&kp A	&kp S	&kp D	&kp F	&kp G	&kp H	&kp J	&kp K	&kp L	&kp SEMICOLON	&kp SQT	&kp BACKSLASH	&kp Z	&kp X	&kp C	&kp V	&kp B	&mo LAYER_FN	&kp TAB	&none	&none	&kp N	&kp M	&kp COMMA	&kp DOT	&kp SLASH	&kp MINUS	&kp CAPSLOCK	&none	&kp EQUAL	&mo LAYER_DIGITS	&mo LAYER_MOUSE	&hp LSFT ENTER	&kp SPACE	&none	&kp TAB	&kp BACKSPACE	
+	&kp ESC	&kp Q	&kp W	&kp E	&kp R	&kp T	&kp Y	&kp U	&kp I	&kp O	&kp P	&kp GRAVE	&kp EQUAL	&kp A	&kp S	&kp D	&kp F	&kp G	&kp H	&kp J	&kp K	&kp L	&kp SEMICOLON	&kp SQT	&kp BACKSLASH	&kp Z	&kp X	&kp C	&kp V	&kp B	&mo LAYER_FN	&kp TAB	&none	&none	&kp N	&kp M	&kp COMMA	&kp DOT	&kp SLASH	&kp MINUS	&kp CAPSLOCK	&none	&kp EQUAL	&mo LAYER_DIGITS	&mo LAYER_MOUSE	&hp LSFT ENTER	&kp SPACE	&half LAYER_MOD_LEFT LAYER_MOD_RIGHT	&kp TAB	&kp BACKSPACE	
 
         >;
         sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
